@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 #from arcgis.mapping import WebMap
 from arcgis.gis import GIS 
-#from arcgis.learn import prepare_data, FeatureClassifier
+from arcgis.learn import prepare_data, FeatureClassifier
 
 
 gis = GIS()
@@ -24,3 +24,12 @@ from PIL import Image
 for image_filepath in glob(os.path.join(data_path, 'images', '**','*.jpg')):
     if Image.open(image_filepath).mode != 'RGB':
         os.remove(image_filepath)
+
+
+data = prepare_data(
+    path=data_path,
+    dataset_type='Imagenet',
+    batch_size=64,
+    chip_size=300
+)
+print("data prepared")
